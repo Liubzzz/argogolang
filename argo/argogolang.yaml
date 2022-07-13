@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-golang-yaml
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL:  https://github.com/Liubzzz/argogolang.git
+    targetRevision: main
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argogolangyaml
+  
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+    automated:
+      seflHeal: true
+      prune: true
